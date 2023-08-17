@@ -20,6 +20,11 @@
       "name": "jj",
       "username": "newadd",
       "password": "$2a$08$yklYjW1zRsrJwQkr/yn5HOI9nYlzOKT0dQy2mrSsSR5YARrd03vHK"
+    },
+    {
+      "name": "jojo",
+      "username": "admin",
+      "password": "$2a$08$umZqfSXKRb4l8gwc5Nj9h.Fx39eBAd9ckShIBnchR37UDzuIzLhgC"
     }
   ]
 }

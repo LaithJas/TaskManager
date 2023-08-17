@@ -9,8 +9,11 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"syscall"
 
 	"github.com/spf13/cobra"
+	"golang.org/x/crypto/bcrypt"
+	"golang.org/x/term"
 )
 
 type Users struct {
@@ -50,7 +53,7 @@ check if a user exisit in a list of users
 */
 func IsUser(users Users, userName string) (bool, error) {
 	for _, user := range users.Users {
-		fmt.Println(user.UserName)
+		// fmt.Println(user.UserName)
 		if user.UserName == userName {
 			return true, errors.New("User Exist")
 		}
@@ -93,6 +96,35 @@ func GetUser(fileName, userName string) (int, error) {
 		}
 	}
 	return -1, errors.New("User Not Found")
+}
+
+/*
+Takes a password as a string, and returns a string representation of the hash
+*/
+func hashPassword(password string) string {
+	hash, err := bcrypt.GenerateFromPassword([]byte(password), 8)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(hash)
+}
+
+// prompt the user to enter a password
+// this is used instead of a command line arugment because it
+// doen't show the password on the screen when user inputs it
+func promptPassword() string {
+	fmt.Println("Enter your password here (Enter for no password): ")
+	bytePassword, _ := term.ReadPassword(syscall.Stdin)
+	return string(bytePassword)
+}
+
+// checks if the password entered is correct
+func checkPassword(hashed string, password string) error {
+	err := bcrypt.CompareHashAndPassword([]byte(hashed), []byte(password))
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.

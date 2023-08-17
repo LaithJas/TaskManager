@@ -5,36 +5,33 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"syscall"
 
 	"github.com/spf13/cobra"
-	"golang.org/x/crypto/bcrypt"
-	"golang.org/x/term"
 )
 
 func init() {
 	rootCmd.AddCommand(createUserCmd)
 }
 
-/*
-Takes a password as a string, and returns a string representation of the hash
-*/
-func hashPassword(password string) string {
-	hash, err := bcrypt.GenerateFromPassword([]byte(password), 8)
-	if err != nil {
-		log.Fatal(err)
-	}
-	return string(hash)
-}
+// /*
+// Takes a password as a string, and returns a string representation of the hash
+// */
+// func hashPassword(password string) string {
+// 	hash, err := bcrypt.GenerateFromPassword([]byte(password), 8)
+// 	if err != nil {
+// 		log.Fatal(err)
+// 	}
+// 	return string(hash)
+// }
 
-// prompt the user to enter a password
-// this is used instead of a command line arugment because it
-// doen't show the password on the screen when user inputs it
-func promptPassword() string {
-	fmt.Println("Enter your password here (Enter for no password): ")
-	bytePassword, _ := term.ReadPassword(syscall.Stdin)
-	return string(bytePassword)
-}
+// // prompt the user to enter a password
+// // this is used instead of a command line arugment because it
+// // doen't show the password on the screen when user inputs it
+// func promptPassword() string {
+// 	fmt.Println("Enter your password here (Enter for no password): ")
+// 	bytePassword, _ := term.ReadPassword(syscall.Stdin)
+// 	return string(bytePassword)
+// }
 
 /*
 Adds a user to the list of users. collects Name, Username, and password.
@@ -62,6 +59,7 @@ func create(usrInfo []string) {
 		usr.Password = hashPassword(password)
 	}
 
+	// marchalling and sending the data to json file
 	jsonData.Users = append(jsonData.Users, usr)
 	data, err := json.MarshalIndent(jsonData, "", "  ")
 	if err != nil {
