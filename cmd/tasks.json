@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "name": "laith",
+      "username": "labousal",
+      "password": "$2a$08$lqM/8vgYrRcxt.YEjdSKVO9qn.eH2TygGXbDd43QL/SS2oZoMPQm.",
+      "task": [
+        {
+          "Id": 1,
+          "Note": "this is the second task now"
+        }
+      ]
+    },
+    {
+      "name": "mo",
+      "username": "mojo",
+      "password": "$2a$08$xovyeR3EZnrycARa1g4R5u5fUZUzEIhlf03kgp9tFd0CGk2sjFeJC"
+    },
+    {
+      "name": "jj",
+      "username": "newadd",
+      "password": "$2a$08$yklYjW1zRsrJwQkr/yn5HOI9nYlzOKT0dQy2mrSsSR5YARrd03vHK"
+    }
+  ]
+}
